@@ -15,14 +15,17 @@ define(
             totals: quote.getTotals(),
             isTaxDisplayedInGrandTotal: window.checkoutConfig.includeTaxInGrandTotal || false,
             isDisplayed: function() {
-                return this.isFullMode();
+                return this.getPrice() > 0 && this.isFullMode();
             },
-            getValue: function() {
+            getPrice: function() {
                 var price = 0;
                 if (this.totals()) {
                     price = totals.getSegment('fee_amount').value;
                 }
-                return this.getFormattedPrice(price);
+                return price;
+            },
+            getValue: function() {
+                return this.getFormattedPrice(this.getPrice());
             },
             getBaseValue: function() {
                 var price = 0;

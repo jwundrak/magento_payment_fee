@@ -11,7 +11,7 @@ define(
              * @override
              */
             isDisplayed: function () {
-                return true;
+                return this.getPrice() > 0;
             }
         });
     }
